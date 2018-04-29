@@ -6975,11 +6975,13 @@ var renderToString = __webpack_require__(108).renderToString;
 var Home = __webpack_require__(117).default;
 var app = express();
 
+//server side rendering: generate HTML on the server
+//universal/isomorphic JS: the same code runs on the server and the browser
+
 app.get('/', function (req, res) {
   //root route
   var content = renderToString(React.createElement(Home, null));
-  //renders component to html by converting it to a raw string
-  //jsx is not valid on a Node server, so we need Webpack and Babel.
+  //renders component to html by converting it to a raw string and sending it to the browser
   res.send(content); //send component when root route is requested
 });
 
@@ -22086,7 +22088,7 @@ var Home = function Home() {
   return _react2.default.createElement(
     'div',
     null,
-    'I\'m the Home component'
+    'I\'m the BESTEST component'
   );
 };
 

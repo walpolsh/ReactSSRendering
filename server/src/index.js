@@ -4,6 +4,9 @@ const renderToString = require('react-dom/server').renderToString;
 const Home = require('./client/components/Home').default;
 const app = express();
 
+//server side rendering: generate HTML on the server
+//universal/isomorphic JS: the same code runs on the server and the browser
+
 app.get('/', (req, res) => {//root route
   const content = renderToString(<Home />);
   //renders component to html by converting it to a raw string and sending it to the browser
