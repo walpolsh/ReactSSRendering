@@ -1,16 +1,15 @@
-const express = require('express'); //common require syntax
-const React = require('react');
-const renderToString = require('react-dom/server').renderToString;
-const Home = require('./client/components/Home').default;
-const app = express();
+//intended to only run on the server
+import express from 'express';
+import renderer from './helpers/renderer.js';
 
+const app = express();
 //server side rendering: generate HTML on the server
+  //Node doesn't support ES6 natively yet, so running our app through web
 //universal/isomorphic JS: the same code runs on the server and the browser
 
+app.use(express.static('public'));//tells express to treat the public directory as a static or public directory thats available to the outside world.
 app.get('/', (req, res) => {//root route
-  const content = renderToString(<Home />);
-  //renders component to html by converting it to a raw string and sending it to the browser
-  res.send(content);//send component when root route is requested
+  res.send(renderer());//send component when root route is requested
 });
 
 app.listen(3000, () => {
